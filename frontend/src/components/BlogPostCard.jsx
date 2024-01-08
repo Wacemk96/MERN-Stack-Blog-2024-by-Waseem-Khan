@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import DOMPurify from 'dompurify';
+const apiURL = import.meta.env.VITE_API_URL;
 
 const BlogPostCard = ({post}) => {
   return (
@@ -10,7 +11,7 @@ const BlogPostCard = ({post}) => {
     >
       <Link to={`/posts/${post._id}`}>
         <img
-          src={`http://localhost:5000/${post.featureImage}`}
+          src={`${apiURL}/${post.featureImage}`}
           alt=""
           className="rounded-lg mb-4"
         />

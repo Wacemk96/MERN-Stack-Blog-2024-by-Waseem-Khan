@@ -29,7 +29,7 @@ const AllBlogPosts = () => {
           pill
           className="mb-2"
         >
-          <Link to="http://localhost:5173/dashboard/write-post">Create New Post</Link>
+          <Link to="/write-post">Create New Post</Link>
         </Button>
       </div>
 

@@ -4,10 +4,11 @@ import Cookies from 'js-cookie';
 import useFetch from '../hooks/useFetch';
 import {Link} from 'react-router-dom';
 import DOMPurify from 'dompurify';
+const apiURL = import.meta.env.VITE_API_URL;
 
 const RelatedPosts = () => {
   const user = useCurrentUser();
-  const getPostUrl = user ? 'http://localhost:5000/api/posts' : 'http://localhost:5000/public';
+  const getPostUrl = user ? `${apiURL}/api/posts` : `${apiURL}/public`;
   const token = Cookies.get('token');
   const [data, loading, error] = useFetch(getPostUrl, token);
   const Posts = data;
@@ -34,7 +35,7 @@ const RelatedPosts = () => {
                     >
                       <Link to={`/posts/${post._id}`}>
                         <img
-                          src={`http://localhost:5000/${post.featureImage}`}
+                          src={`${apiURL}/${post.featureImage}`}
                           className="mb-5 rounded-lg"
                           alt="Image 1"
                         />

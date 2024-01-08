@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useLocation} from 'react-router-dom';
 import {useCurrentUser} from './AuthContext';
 import Cookies from 'js-cookie';
+const apiURL = import.meta.env.VITE_API_URL;
 
 const PostContext = createContext(null);
 const PostContextProvider = (props) => {
@@ -15,7 +16,7 @@ const PostContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
 
   const getPosts = async () => {
-    const url = user ? 'http://localhost:5000/api/posts' : 'http://localhost:5000/public';
+    const url = user ? `${apiURL}/api/posts` : `${apiURL}/public`;
     try {
       setLoading(true);
       const response = await axios.get(url, {
@@ -46,7 +47,7 @@ const PostContextProvider = (props) => {
     createPost: async (data) => {
       try {
         setLoading(true);
-        const response = await axios.post('http://localhost:5000/api/posts/create', data, {
+        const response = await axios.post(`${apiURL}/api/posts/create`, data, {
           withCredentials: true,
           headers: {
             Authorization: Cookies.get('token'),
@@ -67,7 +68,7 @@ const PostContextProvider = (props) => {
     deletePost: async (post_id) => {
       try {
         setLoading(true);
-        const response = await axios.delete(`http://localhost:5000/api/posts/${post_id}`, {
+        const response = await axios.delete(`${apiURL}/api/posts/${post_id}`, {
           withCredentials: true,
           headers: {Authorization: Cookies.get('token')},
         });
@@ -84,7 +85,7 @@ const PostContextProvider = (props) => {
     updatePost: async (post_id, data) => {
       try {
         setLoading(true);
-        const response = await axios.put(`http://localhost:5000/api/posts/${post_id}`, data, {
+        const response = await axios.put(`${apiURL}/api/posts/${post_id}`, data, {
           withCredentials: true,
 
           headers: {Authorization: Cookies.get('token')},

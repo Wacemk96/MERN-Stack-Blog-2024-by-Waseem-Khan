@@ -2,7 +2,7 @@ import {createContext, useContext, useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import Cookies from 'js-cookie';
-
+const apiURL = import.meta.env.VITE_API_URL;
 const AuthContext = createContext(null);
 
 export const AuthContextProvider = (props) => {
@@ -41,7 +41,7 @@ export const AuthContextProvider = (props) => {
       try {
         setLoading(true);
         setError(null);
-        const response = await axios.post('http://localhost:5000/api/auth/register', userInfo);
+        const response = await axios.post(`${apiURL}/api/auth/register`, userInfo);
 
         if (response.data.status === 'failed') {
           setUser(null);

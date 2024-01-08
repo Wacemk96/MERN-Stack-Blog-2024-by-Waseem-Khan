@@ -3,10 +3,10 @@ import useFetch from '../hooks/useFetch';
 import {useCurrentUser} from '../context/AuthContext';
 import BlogPostCard from './BlogPostCard';
 import Cookies from 'js-cookie';
-
+const apiURL = import.meta.env.VITE_API_URL;
 const Blog = () => {
   const user = useCurrentUser();
-  const getPostUrl = user ? 'http://localhost:5000/api/posts' : 'http://localhost:5000/public';
+  const getPostUrl = user ? `${apiURL}/api/posts` : `${apiURL}/public`;
   const token = Cookies.get('token');
   const [data, loading, error] = useFetch(getPostUrl, token);
   const Posts = data;

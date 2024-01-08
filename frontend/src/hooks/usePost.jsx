@@ -1,4 +1,5 @@
 import {useState} from 'react';
+const apiURL = import.meta.env.VITE_API_URL;
 
 const usePost = () => {
   const [loading, setLoading] = useState(false);
@@ -8,7 +9,7 @@ const usePost = () => {
   const getPost = async (post_id) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/posts/${post_id}`, {
+      const response = await fetch(`${apiURL}/api/posts/${post_id}`, {
         headers: {
           Authorization: localStorage.getItem('token'),
         },

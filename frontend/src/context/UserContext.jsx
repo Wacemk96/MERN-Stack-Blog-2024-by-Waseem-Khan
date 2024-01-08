@@ -2,6 +2,7 @@ import {createContext, useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import {useLocation} from 'react-router-dom';
 import Cookies from 'js-cookie';
+const apiURL = import.meta.env.VITE_API_URL;
 
 const UserContext = createContext(null);
 const UserContextProvider = (props) => {
@@ -15,7 +16,7 @@ const UserContextProvider = (props) => {
   const getUsers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/users', {
+      const response = await axios.get(`${apiURL}/api/users`, {
         headers: {Authorization: Cookies.get('token')},
       });
       setError(null);
@@ -42,7 +43,7 @@ const UserContextProvider = (props) => {
     deleteUser: async (user_id) => {
       try {
         setLoading(true);
-        const response = await axios.delete(`http://localhost:5000/api/users/${user_id}`, {
+        const response = await axios.delete(`${apiURL}/api/users/${user_id}`, {
           withCredentials: true,
           headers: {Authorization: Cookies.get('token')},
         });
@@ -60,7 +61,7 @@ const UserContextProvider = (props) => {
     updateUser: async (user_id, data) => {
       try {
         setLoading(true);
-        const response = await axios.put(`http://localhost:5000/api/users/${user_id}`, data, {
+        const response = await axios.put(`${apiURL}/api/users/${user_id}`, data, {
           withCredentials: true,
 
           headers: {Authorization: Cookies.get('token')},
